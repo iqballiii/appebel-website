@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appebel - Your Personal Event Companion</title>
+    <meta name="description" content="Manage your events, discover artists, and never miss a moment with Appebel - the ultimate event management app.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Righteous&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #FF3B7F;
+            --color-secondary: #6B4EFF;
+            --color-accent: #00D9FF;
+            --color-dark: #0A0E27;
+            --color-gray: #1A1F3A;
+            --color-light: #F8F9FF;
+            --color-text: #E8EAFF;
+            --color-text-muted: #9CA3B8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--color-dark);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(255, 59, 127, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 60%, rgba(107, 78, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(0, 217, 255, 0.1) 0%, transparent 50%);
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 24px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Righteous', sans-serif;
+            font-size: 28px;
+            color: var(--color-light);
+            text-decoration: none;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(255, 59, 127, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            animation: fadeInDown 0.8s ease 0.2s both;
+        }
+        
+        .nav-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-light);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Righteous', sans-serif;
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--color-light) 0%, var(--color-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+        
+        .hero .subtitle {
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--color-text-muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            box-shadow: 0 8px 30px rgba(255, 59, 127, 0.4);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255, 59, 127, 0.5);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-light);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* App Screenshots */
+        .app-preview {
+            margin: 80px 0;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        
+        .screenshots {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .screenshot-card {
+            width: 280px;
+            height: 560px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 12px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .screenshot-card:nth-child(2) {
+            animation-delay: -2s;
+        }
+        
+        .screenshot-card:nth-child(3) {
+            animation-delay: -4s;
+        }
+        
+        .screenshot-card:hover {
+            transform: translateY(-8px) scale(1.02);
+        }
+        
+        .screenshot-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-gray), rgba(107, 78, 255, 0.1));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* Features Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-family: 'Righteous', sans-serif;
+            font-size: clamp(32px, 5vw, 48px);
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--color-light) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: var(--color-light);
+        }
+        
+        .feature-card p {
+            color: var(--color-text-muted);
+            font-size: 15px;
+        }
+        
+        /* Support Section */
+        .support-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-light);
+            font-weight: 500;
+            font-size: 15px;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--color-light);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--color-primary);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* FAQ */
+        .faq-list {
+            margin-top: 48px;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 24px;
+            background: none;
+            border: none;
+            color: var(--color-light);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            color: var(--color-primary);
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+            font-size: 24px;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        /* Privacy Policy */
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 48px;
+        }
+        
+        .privacy-content h3 {
+            color: var(--color-light);
+            font-size: 24px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .privacy-content h3:first-child {
+            margin-top: 0;
+        }
+        
+        .privacy-content ul {
+            margin-left: 24px;
+            color: var(--color-text-muted);
+        }
+        
+        .privacy-content li {
+            margin-bottom: 12px;
+        }
+        
+        .privacy-content p {
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h4 {
+            color: var(--color-light);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--color-text-muted);
+            font-size: 14px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                padding: 80px 0 60px;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .contact-form,
+            .privacy-content {
+                padding: 32px 24px;
+            }
+            
+            .screenshot-card {
+                width: 240px;
+                height: 480px;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🎵</div>
+                Appebel
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#support">Support</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Your Personal Event Companion</h1>
+                <p class="subtitle">
+                    Manage your events, discover amazing artists, and never miss a beat. 
+                    Appebel brings your festival experience to life.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">
+                        <span>📱</span>
+                        Download on App Store
+                    </a>
+                    <a href="#" class="btn btn-primary">
+                        <span>🤖</span>
+                        Get it on Google Play
+                    </a>
+                    <a href="#features" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- App Preview -->
+        <section class="app-preview">
+            <div class="container">
+                <div class="screenshots">
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">App Screenshot 1</div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">App Screenshot 2</div>
+                    </div>
+                    <div class="screenshot-card">
+                        <div class="screenshot-placeholder">App Screenshot 3</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Everything You Need for Epic Events</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎭</div>
+                        <h3>Event Management</h3>
+                        <p>Stay organized with personalized schedules, event timelines, and real-time updates for all your favorite shows and performances.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h3>Favorite Artists</h3>
+                        <p>Build your personal lineup by favoriting artists. Get notifications when they're about to perform so you never miss a moment.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Smart Reminders</h3>
+                        <p>Automated alerts and alarms keep you on track. Set custom reminders for performances, meet-ups, and special events.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <h3>Personalized Profile</h3>
+                        <p>Create your unique profile with photos, preferences, and settings. Customize your experience with themes and language options.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Multi-Language Support</h3>
+                        <p>Experience Appebel in your preferred language. We support multiple languages to make events accessible to everyone.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Custom Themes</h3>
+                        <p>Express yourself with beautiful themes and customization options. Make the app truly yours with our flexible design system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Support Section -->
+        <section id="support" class="section">
+            <div class="container">
+                <h2 class="section-title">We're Here to Help</h2>
+                <div class="support-content">
+                    <div class="contact-form">
+                        <h3 style="margin-bottom: 24px; color: var(--color-light);">Contact Us</h3>
+                        <p style="color: var(--color-text-muted); margin-bottom: 32px;">
+                            Have a question or need assistance? Reach out to us and we'll get back to you as soon as possible.
+                        </p>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                    
+                    <!-- FAQ Section -->
+                    <h3 style="margin-bottom: 24px; color: var(--color-light); font-size: 28px;">Frequently Asked Questions</h3>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How do I create an account?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Simply download the Appebel app from the App Store or Google Play, open it, and tap "Sign Up." You'll need to provide your name, email, and phone number to create your personalized account. You can also add optional information like your date of birth and gender to enhance your experience.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Can I add my favorite artists?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Yes! Browse through the artist lineup in the app and tap the star icon next to any artist to add them to your favorites. You'll receive notifications when they're about to perform, ensuring you never miss their set.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How do notifications work?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Appebel sends you timely notifications about event updates, artist performances, and schedule changes. You can customize your notification preferences in the app settings. We use alarms and scheduling features to ensure you're always informed at the right time.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Can I delete my account and data?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Absolutely. You have full control over your data. Go to Settings > Account > Delete Account. This will permanently remove all your personal information, profile data, and preferences from our systems. This action cannot be undone.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Is my data secure?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    We take your privacy seriously. All personal information is encrypted and stored securely. We only collect data necessary to provide you with the best event experience, and we never share your information with third parties without your consent. Read our full Privacy Policy below for more details.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Which platforms is Appebel available on?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-content">
+                                    Appebel is available for both iOS and Android devices. Download it from the Apple App Store for iPhone and iPad, or from Google Play for Android phones and tablets. We're constantly working to improve the app on both platforms.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Section -->
+        <section id="privacy" class="section">
+            <div class="container">
+                <h2 class="section-title">Privacy Policy</h2>
+                <div class="privacy-content">
+                    <p><em>Last Updated: February 2026</em></p>
+                    
+                    <h3>Data Collection and Usage</h3>
+                    <p>We collect and process the following information to provide you with a personalized event experience:</p>
+                    
+                    <ul>
+                        <li><strong>Personal Identity Information:</strong> We collect your first name, last name, and phone number to create and secure your unique user account.</li>
+                        
+                        <li><strong>Profile Details:</strong> Optional information such as gender and date of birth may be collected to personalize app content and event recommendations.</li>
+                        
+                        <li><strong>Media and Images:</strong> With your explicit permission, the app accesses your device camera and photo library to allow you to upload and set a profile picture.</li>
+                        
+                        <li><strong>Communication & Support:</strong> We collect email addresses and any text provided via our feedback forms to respond to support requests and improve app functionality.</li>
+                        
+                        <li><strong>Device Permissions:</strong>
+                            <ul>
+                                <li><strong>Notifications:</strong> Used to send timely alerts regarding event schedules and updates.</li>
+                                <li><strong>Alarms & Scheduling:</strong> Used to help you manage your personal event lineup and reminders.</li>
+                            </ul>
+                        </li>
+                        
+                        <li><strong>User Choices:</strong> We store your preferences for language, app themes, and "Favorite Artists" to ensure your settings persist across sessions.</li>
+                    </ul>
+                    
+                    <h3>How We Use Your Information</h3>
+                    <p>Your information is used to:</p>
+                    <ul>
+                        <li>Create and manage your user account</li>
+                        <li>Provide personalized event recommendations</li>
+                        <li>Send notifications about your favorite artists and event updates</li>
+                        <li>Improve our app features and user experience</li>
+                        <li>Respond to your support inquiries and feedback</li>
+                    </ul>
+                    
+                    <h3>Data Retention and Deletion</h3>
+                    <p><strong>User Control:</strong> You have the right to modify your profile information at any time through the app settings.</p>
+                    <p><strong>Account Deletion:</strong> We provide a clear "Delete Account" feature within the application. Upon request, we will permanently remove your personal data and profile from our active systems in accordance with legal requirements. To delete your account, navigate to Settings > Account > Delete Account in the app.</p>
+                    
+                    <h3>Data Security</h3>
+                    <p>We implement industry-standard security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. All data transmissions are encrypted using secure protocols.</p>
+                    
+                    <h3>Third-Party Services</h3>
+                    <p>We do not share your personal information with third parties for their marketing purposes. We may use trusted service providers to help us operate our app, but they are bound by confidentiality agreements and data protection requirements.</p>
+                    
+                    <h3>Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access the personal data we hold about you</li>
+                        <li>Request corrections to your personal data</li>
+                        <li>Request deletion of your personal data</li>
+                        <li>Withdraw consent for data processing at any time</li>
+                        <li>Export your data in a portable format</li>
+                    </ul>
+                    
+                    <h3>Children's Privacy</h3>
+                    <p>Appebel is not intended for users under the age of 13. We do not knowingly collect personal information from children under 13. If we become aware that we have collected such information, we will take steps to delete it promptly.</p>
+                    
+                    <h3>Changes to This Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy in the app and updating the "Last Updated" date. Your continued use of Appebel after changes are posted constitutes acceptance of the updated policy.</p>
+                    
+                    <h3>Contact Us</h3>
+                    <p>If you have any questions about this Privacy Policy or our data practices, please contact us using the form above or email us at <a href="mailto:privacy@appebel.com" style="color: var(--color-primary);">privacy@appebel.com</a>.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="support-content">
+                    <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+                        <p style="font-size: 18px; color: var(--color-text-muted); margin-bottom: 32px;">
+                            We'd love to hear from you! Whether you have questions, feedback, or need support, our team is here to help.
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+                            <p style="color: var(--color-text);">
+                                📧 Email: <a href="mailto:support@appebel.com" style="color: var(--color-primary); text-decoration: none;">support@appebel.com</a>
+                            </p>
+                            <p style="color: var(--color-text);">
+                                🌐 Website: <a href="https://appebel.com" style="color: var(--color-primary); text-decoration: none;">www.appebel.com</a>
+                            </p>
+                            <p style="color: var(--color-text-muted); font-size: 14px; margin-top: 16px;">
+                                Business hours: Monday - Friday, 9:00 AM - 6:00 PM EST
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo" style="margin-bottom: 16px;">
+                        <div class="logo-icon">🎵</div>
+                        Appebel
+                    </div>
+                    <p style="color: var(--color-text-muted); font-size: 14px;">
+                        Your personal companion for unforgettable event experiences.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#">Download</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#support">Help Center</a></li>
+                        <li><a href="#support">FAQs</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Report a Bug</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Appebel. All rights reserved. Made with ❤️ for event lovers worldwide.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // ============================================
+        // API CONFIGURATION
+        // ============================================
+        // TODO: Replace this with your actual API endpoint once deployed
+        const API_CONFIG = {
+            endpoint: 'https://your-api-domain.com/api/contact',
+            // Alternative services you can use:
+            // - Formspree: 'https://formspree.io/f/YOUR_FORM_ID'
+            // - EmailJS: Configure with your EmailJS credentials
+            // - Your own backend API
+            enabled: false // Set to true once you have a real API endpoint
+        };
+        
+        // ============================================
+        // CONTACT FORM SUBMISSION
+        // ============================================
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            
+            // Get form data
+            const formData = {
+                name: form.name.value,
+                email: form.email.value,
+                subject: form.subject.value,
+                message: form.message.value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+            
+            try {
+                if (API_CONFIG.enabled) {
+                    // ============================================
+                    // REAL API SUBMISSION (when API is ready)
+                    // ============================================
+                    const response = await fetch(API_CONFIG.endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to send message');
+                    }
+                    
+                    const result = await response.json();
+                    console.log('Form submission successful:', result);
+                    
+                    // Show success message
+                    showNotification('✅ Thank you! Your message has been sent successfully.', 'success');
+                    form.reset();
+                    
+                } else {
+                    // ============================================
+                    // PLACEHOLDER MODE (for testing)
+                    // ============================================
+                    console.log('=== FORM SUBMISSION (Test Mode) ===');
+                    console.log('API Endpoint:', API_CONFIG.endpoint);
+                    console.log('Form Data:', formData);
+                    console.log('===================================');
+                    
+                    // Simulate API delay
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Show success message
+                    showNotification('✅ Thank you for your message! (Test mode - API not configured yet)', 'success');
+                    form.reset();
+                }
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                showNotification('❌ Oops! Something went wrong. Please try again or email us directly.', 'error');
+            } finally {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
+        });
+        
+        // ============================================
+        // NOTIFICATION SYSTEM
+        // ============================================
+        function showNotification(message, type = 'success') {
+            // Remove any existing notifications
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 24px;
+                right: 24px;
+                background: ${type === 'success' ? 'linear-gradient(135deg, #00D9FF, #6B4EFF)' : 'linear-gradient(135deg, #FF3B7F, #FF6B6B)'};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+                font-weight: 500;
+                max-width: 400px;
+                animation: slideInRight 0.3s ease;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+        
+        // ============================================
+        // FAQ ACCORDION FUNCTIONALITY
+        // ============================================
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+        
+        // ============================================
+        // SMOOTH SCROLL FOR NAVIGATION
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
