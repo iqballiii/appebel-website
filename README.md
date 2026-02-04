@@ -4,7 +4,7 @@ Official website for Appebel mobile application, featuring app information, supp
 
 ## 🌐 Live Website
 
-Visit: [https://iqballiii.github.io/appebel-website](https://YOUR-USERNAME.github.io/appebel-website)
+Visit: [https://iqballiii.github.io/appebel-website](https://iqballiii.github.io/appebel-website/)
 
 ## 📱 About Appebel
 
